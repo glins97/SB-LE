@@ -8,7 +8,7 @@ Alunos:
     Jaqueline Gontijo
     Tiago Cruz
     Carol Ferreira
-    Lucas Barroso
+    Lucas Barros
 
 */
 /*Macro para verificação de inclusão de arquivos de estrutura,

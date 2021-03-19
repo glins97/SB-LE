@@ -7,7 +7,7 @@ Alunos:
     Jaqueline Gontijo
     Tiago Cruz
     Carol Ferreira
-    Lucas Barroso
+    Lucas Barros
 
 Projeto:
     Leitor/Exibidor de arquivos .class.
