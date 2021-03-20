@@ -49,11 +49,11 @@ Classfile *readArquivo(Classfile *cf, char *nomeArquivo)
 
 	// printf("Passou leitura field\n");
 
-	/*Leitura do valor 'methods_count', representando
+	/*Leitura do value 'methods_count', representando
     a quantidade de entradas na tabela Method*/
 	cf->methods_count = u2READ(fp);
-	//printf("Metodos: %d\n",arquivoClass->methods_count);
-	cf->methods = (cf->methods_count > 0) ? readMetodos(fp, cf->methods_count, cf->constant_pool) : NULL;
+	//printf("Methods: %d\n",arquivoClass->methods_count);
+	cf->methods = (cf->methods_count > 0) ? readMethods(fp, cf->methods_count, cf->constant_pool) : NULL;
 
 	cf->attributes_count = u2READ(fp);
 	if (cf->attributes_count > 0)
@@ -61,7 +61,7 @@ Classfile *readArquivo(Classfile *cf, char *nomeArquivo)
 		cf->attributes = (Attribute_info **)malloc(cf->attributes_count * sizeof(attribute_info *));
 		for (int i = 0; i < cf->attributes_count; i++)
 		{
-			*(cf->attributes + i) = readAtributos(fp, *(cf->attributes + i), cf->constant_pool);
+			*(cf->attributes + i) = readAttrs(fp, *(cf->attributes + i), cf->constant_pool);
 		}
 	}
 
@@ -193,7 +193,7 @@ Field_info *readFields(File *fp, Field_info *field, u2 f_count, Cp_info *cp)
 	return field;
 }
 
-Method_info *readMetodos(FILE *fp, Method_info *metodo, u2 m_count, Cp_info *cp)
+Method_info *readMethods(FILE *fp, Method_info *metodo, u2 m_count, Cp_info *cp)
 {
 	metodo = (Method_info *)malloc(m_count * sizeof(Method_info));
 
@@ -214,7 +214,7 @@ Method_info *readMetodos(FILE *fp, Method_info *metodo, u2 m_count, Cp_info *cp)
 			p->attributes = (Attribute_info **)malloc(i->attributes_count * sizeof(Attribute_info *));
 			for (int i = 0; i < p->attributes_count; i++)
 			{
-				*(p->attributes + i) = leAtributos(fp, *(p->attributes + i), cp);
+				*(p->attributes + i) = leAttrs(fp, *(p->attributes + i), cp);
 			}
 		}
 	}
@@ -253,9 +253,9 @@ code_attribute *readCode(FILE *fp, cp_info *cp)
 	if (code_attributes->attributes_count > 0)
 	{
 		code_attributes->attributes = (attribute_info **)malloc(code_attributes->attributes_count * sizeof(attribute_info *));
-		for (int posicao = 0; posicao < code_attributes->attributes_count; posicao++)
+		for (int position = 0; position < code_attributes->attributes_count; position++)
 		{
-			*(code_attributes->attributes + posicao) = readAttributes(fp, cp);
+			*(code_attributes->attributes + position) = readAttributes(fp, cp);
 		}
 	}
 
@@ -291,7 +291,7 @@ exception_table *readExceptionTable(FILE *fp, u2 size)
 	return exception_tableAux;
 }
 
-Attribute_info *readAtributos(FILE *fp, Attribute_info *a, Cp_info *cp)
+Attribute_info *readAttrs(FILE *fp, Attribute_info *a, Cp_info *cp)
 {
 	a = (Attribute_info *)malloc(sizeof(Attribute_info));
 
@@ -304,7 +304,7 @@ Attribute_info *readAtributos(FILE *fp, Attribute_info *a, Cp_info *cp)
 	if (a->attribute_length > 0)
 	{
 		char *string_name_index;
-		string_name_index = decodificaStringUTF8(cp + attributes->attribute_name_index - 1);
+		string_name_index = decodeUTF8String(cp + attributes->attribute_name_index - 1);
 
 		if (strcmp(string_name_index, "SourceFile") == 0)
 		{
@@ -404,9 +404,9 @@ innerClasses_attribute *readInnerClasses(FILE *fp, cp_info *cp)
 	if (innerClasses->number_of_classes > 0)
 	{
 		innerClasses->classes_vector = (classes **)malloc(innerClasses->number_of_classes * sizeof(classes *));
-		for (int posicao = 0; posicao < innerClasses->number_of_classes; posicao++)
+		for (int position = 0; position < innerClasses->number_of_classes; position++)
 		{
-			*(innerClasses->classes_vector + posicao) = readClasses(fp);
+			*(innerClasses->classes_vector + position) = readClasses(fp);
 		}
 	}
 	return innerClasses;
@@ -414,13 +414,13 @@ innerClasses_attribute *readInnerClasses(FILE *fp, cp_info *cp)
 
 classes *readClasses(FILE *fp)
 {
-	classes *classeRetorno = (classes *)malloc(sizeof(classes));
-	classeRetorno->inner_class_info_index = u2Read(fp);
-	classeRetorno->outer_class_info_index = u2Read(fp);
-	classeRetorno->inner_name_index = u2Read(fp);
-	classeRetorno->inner_class_access_flags = u2Read(fp);
+	classes *classeret = (classes *)malloc(sizeof(classes));
+	classeret->inner_class_info_index = u2Read(fp);
+	classeret->outer_class_info_index = u2Read(fp);
+	classeret->inner_name_index = u2Read(fp);
+	classeret->inner_class_access_flags = u2Read(fp);
 
-	return classeRetorno;
+	return classeret;
 }
 
 stackMapTable_attribute *readStackMapTable(FILE *fp)
@@ -430,9 +430,9 @@ stackMapTable_attribute *readStackMapTable(FILE *fp)
 	if (stackMapTable->number_of_entries > 0)
 	{
 		stackMapTable->entries = (stack_map_frame **)malloc(stackMapTable->number_of_entries * sizeof(stack_map_frame *));
-		for (int posicao = 0; posicao < stackMapTable->number_of_entries; posicao++)
+		for (int position = 0; position < stackMapTable->number_of_entries; position++)
 		{
-			*(stackMapTable->entries + posicao) = readStackMapFrame(fp);
+			*(stackMapTable->entries + position) = readStackMapFrame(fp);
 		}
 	}
 	return stackMapTable;
@@ -469,9 +469,9 @@ stack_map_frame *readStackMapFrame(FILE *fp)
 		StackMapFrame->map_frame_type.append_frame.offset_delta = u2Read(fp);
 		u2 sizeMalloc = (StackMapFrame->frame_type - 251);
 		StackMapFrame->map_frame_type.append_frame.locals = (verification_type_info **)malloc(sizeMalloc * sizeof(verification_type_info *));
-		for (int posicao = 0; posicao < sizeMalloc; posicao++)
+		for (int position = 0; position < sizeMalloc; position++)
 		{
-			*(StackMapFrame->map_frame_type.append_frame.locals + posicao) = readVerificationTypeInfo(fp);
+			*(StackMapFrame->map_frame_type.append_frame.locals + position) = readVerificationTypeInfo(fp);
 		}
 	}
 	else if (StackMapFrame->frame_type == 255)
@@ -481,10 +481,10 @@ stack_map_frame *readStackMapFrame(FILE *fp)
 		if (StackMapFrame->map_frame_type.full_frame.number_of_locals > 0)
 		{
 			StackMapFrame->map_frame_type.full_frame.locals = (verification_type_info **)malloc(StackMapFrame->map_frame_type.full_frame.number_of_locals * sizeof(verification_type_info *));
-			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_locals; posicao++)
+			for (int position = 0; position < StackMapFrame->map_frame_type.full_frame.number_of_locals; position++)
 			{
-				*(StackMapFrame->map_frame_type.full_frame.locals + posicao) = readVerificationTypeInfo(fp);
-				if ((*(StackMapFrame->map_frame_type.full_frame.locals + posicao))->tag == 7)
+				*(StackMapFrame->map_frame_type.full_frame.locals + position) = readVerificationTypeInfo(fp);
+				if ((*(StackMapFrame->map_frame_type.full_frame.locals + position))->tag == 7)
 				{
 				}
 			}
@@ -493,9 +493,9 @@ stack_map_frame *readStackMapFrame(FILE *fp)
 		if (StackMapFrame->map_frame_type.full_frame.number_of_stack_items > 0)
 		{
 			StackMapFrame->map_frame_type.full_frame.stack = (verification_type_info **)malloc(StackMapFrame->map_frame_type.full_frame.number_of_stack_items * sizeof(verification_type_info *));
-			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_stack_items; posicao++)
+			for (int position = 0; position < StackMapFrame->map_frame_type.full_frame.number_of_stack_items; position++)
 			{
-				*(StackMapFrame->map_frame_type.full_frame.stack + posicao) = readVerificationTypeInfo(fp);
+				*(StackMapFrame->map_frame_type.full_frame.stack + position) = readVerificationTypeInfo(fp);
 			}
 		}
 	}

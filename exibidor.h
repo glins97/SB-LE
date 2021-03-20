@@ -19,23 +19,23 @@ Alunos:
 #include "classfile.h"
 #include "leitor.h"
 
-void imprimirClassfile(Classfile *);
-void imprimeConstantPool(Classfile *);
-void imprimeFields(Classfile *);
-void imprimeMetodos(Classfile *);
-void imprimeAtributos(Classfile *);
+void printClassfile(Classfile *);
+void printConstantPool(Classfile *);
+void printFields(Classfile *);
+void printMethods(Classfile *);
+void printAttrs(Classfile *);
 
-char *decodificarCode(Cp_info *cp, u2 sizeCP, u1 *code, u4 length, instrucao *instrucoes);
-char *buscaNomeTag(u1 tag);
-char *decodificaStringUTF8(Cp_info *cp);
-char *decodificarOperandoInstrucao(Cp_info *cp, u2 index, u2 sizeCP);
-char *decodificaNIeNT(Cp_info *cp, u2 index, u1 tipo);
-char *decodificaAccessFlags(u2 flag);
-char *organizandoFlags(char *flagsOrdemInversa);
-double decodificaDoubleInfo(Cp_info *cp);
-uint64_t decodificaLongInfo(Cp_info *cp);
-int decodificaIntegerInfo(Cp_info *cp);
-float decodificaFloatInfo(Cp_info *cp);
-int setaOffsetImpressao(int posicao, u1 offset);
+char *decode(Cp_info *cp, u2 sizeCP, u1 *code, u4 length, instrucao *instructions);
+char *searchNameTag(u1 tag);
+char *decodeUTF8String(Cp_info *cp);
+char *decodeInstructionOP(Cp_info *cp, u2 index, u2 sizeCP);
+char *decodeNINT(Cp_info *cp, u2 index, u1 tipo);
+char *decodeAccessFlags(u2 flag);
+char *sortFlags(char *flagsOrdemInversa);
+double decodeDoubleInfo(Cp_info *cp);
+uint64_t decodeLongInfo(Cp_info *cp);
+int decodeIntegerInfo(Cp_info *cp);
+float decodeFloatInfo(Cp_info *cp);
+int setPrintOffset(int position, u1 offset);
 
 #endif

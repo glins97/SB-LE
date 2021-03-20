@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
   /* Cria estrutura do tipo class file*/
   class_file = (Classfile *)malloc(sizeof(struct classfile));
 
-  /* Le o arquivo e armazena nas esttruturas correspondentes e retorna o ponteiro
+  /* Le o arquivo e armazena nas esttruturas correspondentes e retorna o pointer
    * para a estrutura do tipo classfile.
    */
   class_file = readArquivo(class_file, nomeArquivo);
 
-  /* Imprime as informacoes lidas do arquivo .class */
-  imprimirClassfile(class_file);
+  /* print as informacoes lidas do arquivo .class */
+  printClassfile(class_file);
 
   return 0;
 }

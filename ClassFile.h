@@ -170,7 +170,7 @@ typedef struct cp_info
     } cp_union;
 } Cp_info;
 
-// Enum para os possiveis valores da tag de entrada da CP
+// Enum para os possiveis valuees da tag de entrada da CP
 enum tag_values
 {
     CONSTANT_Utf8 = 1,
@@ -189,7 +189,7 @@ enum tag_values
     CONSTANT_InvokeDynamic = 18
 };
 
-// Enum de possíveis valores de flags de acesso
+// Enum de possíveis valuees de flags de acesso
 typedef enum access_flags
 {
     PUBLIC = 1,
@@ -203,7 +203,7 @@ typedef enum access_flags
     ENUM = 16384
 } Access_flags;
 
-// Informações sobre Atributos
+// Informações sobre Attrs
 typedef struct attribute_info
 {
     u2 attribute_name;
@@ -272,19 +272,19 @@ typedef struct method_info
     Attribute_info **attributes;
 } Method_info;
 
-// Informações sobre Atributos do Fonte
+// Informações sobre Attrs do Fonte
 typedef struct source_file_attribute
 {
     u2 source_file;
 } Source_file_attribute;
 
-// Informações sobre Atributos de Constantes
+// Informações sobre Attrs de Constantes
 typedef struct constant_value_attribute
 {
     u2 constant_value;
 } Constant_value_attribute;
 
-// Informações sobre Atributos de Exceções
+// Informações sobre Attrs de Exceções
 typedef struct exception_attribute
 {
     u2 num_exceptions;
@@ -302,14 +302,14 @@ typedef struct classes
     u2 outer_class_info;
 } Classes;
 
-// Informações sobre Atributos de Classes Internas (Inner Classes)
+// Informações sobre Attrs de Classes Internas (Inner Classes)
 typedef struct inner_classes_attribute
 {
     u2 num_classes;
     Classes **classes_array;
 } Inner_classes_attribute;
 
-// Informações sobre Atributos de Assinatura
+// Informações sobre Attrs de Assinatura
 typedef struct signature_attribute
 {
     u2 signature;
@@ -385,7 +385,7 @@ typedef struct stack_map_frame
     } map_frame_type;
 } Stack_map_frame;
 
-// Informações sobre Atributos de Mapeamento de Pilha
+// Informações sobre Attrs de Mapeamento de Pilha
 typedef struct stack_map_attribute
 {
     u2 num_entries;

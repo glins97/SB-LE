@@ -28,11 +28,11 @@ Classfile *readArquivo(Classfile *, char *);
 Cp_info *readConstantPool(FILE *fp, Cp_info *cp, u2 cp_count);
 u2 *readInterfaces(FILE *fp, u2 *interface, u2 i_count);
 Field_info *readFields(File *fp, Field_info *field, u2 f_count, Cp_info *cp);
-Method_info *readMetodos(FILE *fp, Method_info *metodo, u2 m_count, Cp_info *cp)
+Method_info *readMethods(FILE *fp, Method_info *metodo, u2 m_count, Cp_info *cp)
     code_attribute *readCode(FILE *fp, cp_info *cp);
 line_number_table *readLineNumberTable(FILE *fp, cp_info *cp);
 exception_table *readExceptionTable(FILE *fp, u2 size);
-Attribute_info *readAtributos(FILE *fp, Attribute_info *a, Cp_info *cp);
+Attribute_info *readAttrs(FILE *fp, Attribute_info *a, Cp_info *cp);
 exceptions_attribute *readreadExceptionAttributes(FILE *fp);
 constantValue_attribute *readConstantValue(FILE *fp);
 signature_attribute *readSignature(FILE *fp);
