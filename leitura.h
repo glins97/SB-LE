@@ -4,16 +4,18 @@ Software Básico - Turma A
 Leitor/Exibidor de arquivo .class
 
 Alunos:
-    Gabriel Lins
-    Jaqueline Gontijo
-    Tiago Cruz
-    Carol Ferreira
-    Lucas Barros
+Jaqueline Gutierri Coelho - 15/0131283
+Tiago Cruz Valadares - 14/0164120
+Lucas de Melo Rodrigues de Barros - 18/0022539
+Gabriel Lins e Nobrega - 15/0079371
+Caroline Ferreira Pinto - 16/0067766
 
 */
+
 /*Macro para verificação de inclusão de arquivos de estrutura,
 bibliotecas de leitura/escrita de dados e manipulação de arquivos
 */
+
 #ifndef LEITURA_H
 #define LEITURA_H
 
