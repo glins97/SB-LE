@@ -1,12 +1,9 @@
 # LeitorExibidorSB20192
 Implementação do trabalho da disciplina Software Básico relativo a um Leitor e um Exibidor de arquivos de extensão class.
 
-
 Universidade de Brasília - 2020/02
 
-Software Básico - Turma A
-
-Leitor/Exibidor de arquivo .class
+Software Básico - Turma A - Leitor/Exibidor de arquivo .class
 
 Alunos:
 
