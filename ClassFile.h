@@ -1,5 +1,5 @@
 /*
-Universidade de Brasília - 02/2019
+Universidade de Brasília - 2020/02
 Software Básico - Turma A
 
 Alunos:
@@ -64,9 +64,9 @@ Para maiores detalhes, verificar implementação.
 /* TIPAGEM GERAL */
 /* ------------- */
 
-typedef uint8_t     u1;
-typedef uint16_t    u2;
-typedef uint32_t    u4;
+typedef uint8_t u1;
+typedef uint16_t u2;
+typedef uint32_t u4;
 
 #define NAME_INDEX 1
 #define NAME_AND_TYPE 2
@@ -171,35 +171,36 @@ typedef struct cp_info
 } Cp_info;
 
 // Enum para os possiveis valores da tag de entrada da CP
-enum tag_values {
-	CONSTANT_Utf8                   = 1,
-	CONSTANT_Integer                = 3,
-	CONSTANT_Float                  = 4,
-	CONSTANT_Long                   = 5,
-	CONSTANT_Double                 = 6,
-	CONSTANT_Class                  = 7,
-	CONSTANT_String                 = 8,
-	CONSTANT_Field                  = 9,
-	CONSTANT_Method                 = 10,
-	CONSTANT_InterfaceMethod        = 11,
-	CONSTANT_NameAndType            = 12,
-	CONSTANT_MethodHandle           = 15,
-	CONSTANT_MethodType             = 16,
-	CONSTANT_InvokeDynamic          = 18
+enum tag_values
+{
+    CONSTANT_Utf8 = 1,
+    CONSTANT_Integer = 3,
+    CONSTANT_Float = 4,
+    CONSTANT_Long = 5,
+    CONSTANT_Double = 6,
+    CONSTANT_Class = 7,
+    CONSTANT_String = 8,
+    CONSTANT_Field = 9,
+    CONSTANT_Method = 10,
+    CONSTANT_InterfaceMethod = 11,
+    CONSTANT_NameAndType = 12,
+    CONSTANT_MethodHandle = 15,
+    CONSTANT_MethodType = 16,
+    CONSTANT_InvokeDynamic = 18
 };
 
 // Enum de possíveis valores de flags de acesso
 typedef enum access_flags
 {
-	PUBLIC      = 1,
-	PRIVATE     = 2,
-	PROTECTED   = 4,
-	STATIC      = 8,
-	FINAL       = 16,
-	VOLATILE    = 64,
-	TRANSIENT   = 128,
-	SYNTHETIC   = 4096,
-	ENUM        = 16384
+    PUBLIC = 1,
+    PRIVATE = 2,
+    PROTECTED = 4,
+    STATIC = 8,
+    FINAL = 16,
+    VOLATILE = 64,
+    TRANSIENT = 128,
+    SYNTHETIC = 4096,
+    ENUM = 16384
 } Access_flags;
 
 // Informações sobre Atributos
@@ -225,7 +226,7 @@ typedef struct exception_info
 {
     u2 start_pc;
     u2 end_pc;
-    u2 handler_pc;
+    u2 handread_pc;
     u2 catch_type;
 } Exception_info;
 
@@ -379,7 +380,7 @@ typedef struct stack_map_frame
             u2 num_stack_items;
 
             Verification_type_info **locals;
-            Verification_type_info ** stack;
+            Verification_type_info **stack;
         } full_frame;
     } map_frame_type;
 } Stack_map_frame;
@@ -397,22 +398,22 @@ typedef struct stack_map_attribute
 // Estrutura referente ao arquivo .class em si
 typedef struct classfile
 {
-    u4              magic;                  // The magic item supplies the magic number identifying the class file format; it has the value 0xCAFEBABE.
-    u2              minor_version;          // The values of the minor_version and major_version items are the minor and major version numbers of this class file.
-    u2              major_version;          // Together, a major and a minor version number determine the version of the class file format.
-    u2              constant_pool_count;    // The value of the constant_pool_count item is equal to the number of entries in the constant_pool table plus one.
-    Cp_info         *constant_pool;         // The constant_pool is a table of structures (§4.4) representing various string constants, class and interface names, field names, and other constants that are referred to within the ClassFile structure and its substructures.
-    u2              access_flags;           // The value of the access_flags item is a mask of flags used to denote access permissions to and properties of this class or interface.
-    u2              this_class;             // The value of the this_class item must be a valid index into the constant_pool table.
-    u2              super_class;            // For a class, the value of the super_class item either must be zero or must be a valid index into the constant_pool table.
-    u2              interfaces_count;       // The value of the interfaces_count item gives the number of direct superinterfaces of this class or interface type.
-    u2              *interfaces;            // Each value in the interfaces array must be a valid index into the constant_pool table.
-    u2              fields_count;           // The value of the fields_count item gives the number of field_info structures in the fields table.
-    Field_info      *fields;                // Each value in the fields table must be a field_info (§4.5) structure giving a complete description of a field in this class or interface.
-    u2              methods_count;           // The value of the methods_count item gives the number of method_info structures in the methods table.
-    Method_info     *methods;               // Each value in the methods table must be a method_info (§4.6) structure giving a complete description of a method in this class or interface.
-    u2              attributes_count;       // The value of the attributes_count item gives the number of attributes (§4.7) in the attributes table of this class.
-    Attribute_info  **attributes;           // Each value of the attributes table must be an attribute_info (§4.7) structure.
+    u4 magic;                    // The magic item supplies the magic number identifying the class file format; it has the value 0xCAFEBABE.
+    u2 minor_version;            // The values of the minor_version and major_version items are the minor and major version numbers of this class file.
+    u2 major_version;            // Together, a major and a minor version number determine the version of the class file format.
+    u2 constant_pool_count;      // The value of the constant_pool_count item is equal to the number of entries in the constant_pool table plus one.
+    Cp_info *constant_pool;      // The constant_pool is a table of structures (§4.4) representing various string constants, class and interface names, field names, and other constants that are referred to within the ClassFile structure and its substructures.
+    u2 access_flags;             // The value of the access_flags item is a mask of flags used to denote access permissions to and properties of this class or interface.
+    u2 this_class;               // The value of the this_class item must be a valid index into the constant_pool table.
+    u2 super_class;              // For a class, the value of the super_class item either must be zero or must be a valid index into the constant_pool table.
+    u2 interfaces_count;         // The value of the interfaces_count item gives the number of direct superinterfaces of this class or interface type.
+    u2 *interfaces;              // Each value in the interfaces array must be a valid index into the constant_pool table.
+    u2 fields_count;             // The value of the fields_count item gives the number of field_info structures in the fields table.
+    Field_info *fields;          // Each value in the fields table must be a field_info (§4.5) structure giving a complete description of a field in this class or interface.
+    u2 methods_count;            // The value of the methods_count item gives the number of method_info structures in the methods table.
+    Method_info *methods;        // Each value in the methods table must be a method_info (§4.6) structure giving a complete description of a method in this class or interface.
+    u2 attributes_count;         // The value of the attributes_count item gives the number of attributes (§4.7) in the attributes table of this class.
+    Attribute_info **attributes; // Each value of the attributes table must be an attribute_info (§4.7) structure.
 } Classfile;
 
 #endif
